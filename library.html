@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="library.css">
+  <title>Books</title>
+</head>
+
+<body>
+  <h1>Your library</h1>
+  <table id="sample-table">
+    <thead>
+      <tr class= "row">
+        <th>Title</th>
+        <th>Author</th>
+        <th>Number of pages</th>
+        <th>Read or not?</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <!-- form to add new books -->
+  <button id="newBook">New Book</button>
+  <!-- modal -->
+  <div id="addBookModal" class="modal">
+    <!-- modal content -->
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <p>
+        <!-- form to add new books -->
+        <form action="" method="post" id="form1">
+          Title: <input type="text" name="form" id="book-title"><br>
+          Author: <input type="text" name="form" id="book-author"><br>
+          Number of pages: <input type="number" name="form" id="book-pages"><br>
+          <!-- Toggle button in the form -->
+          <label class="switch">
+            To read:
+            <input type="checkbox" id="book-read">Read</input>
+            <span class="slider" value="To read"></span>
+          </label> 
+          <br>
+        
+          <!-- button to add input -->
+          <input type="button" onclick="addBook()" value="Add New Book">
+        </form>
+      </p>
+    </div>
+  </div>
+
+  <script src="library.js"></script>
+</body>
+</html>
