@@ -1,6 +1,6 @@
 const myLibrary = [];
 
-// check local storage
+// Check local storage
 function storageAvailable(type) {
   let storage;
   try {
@@ -80,6 +80,10 @@ function render() {
     readBtnLabel.setAttribute('class', 'switch');
     const readBtnInput = document.createElement('input');
     readBtnInput.setAttribute('type', 'checkbox');
+    readBtnInput.addEventListener('change', function (event) {
+      book.read = event.target.checked;
+      updateLibraryStore();
+    });
     if (book.read) {
       readBtnInput.setAttribute('checked', 'checked');
     }
@@ -109,7 +113,7 @@ function render() {
   tableContent.replaceWith(virtualContent);
 }
 
-// get checkbox value
+// Get checkbox value
 function isCheckbox (field) {
   return field.getAttribute('type') === 'checkbox';
 }
@@ -131,7 +135,7 @@ function setFieldValue (elementId, newValue) {
   }
 }
 
-// clear the form
+// Clear the form
 function clearForm () {
   setFieldValue('book-title', '');
   setFieldValue('book-author', '');
@@ -139,6 +143,7 @@ function clearForm () {
   setFieldValue('book-read', false);
 }
 
+// Add a new book
 function addBook () {
   const title = getFieldValue('book-title');
   const author = getFieldValue('book-author');
