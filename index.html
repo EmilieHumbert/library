@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">        
+  <link rel="stylesheet" href="library.css">
+  <title>Books</title>
+</head>
+
+<body class="blue-grey lighten-5">
+  <h1>Your library</h1>
+  <div class="container">
+    <div class="col l1"></div>
+    <div class="col l10">
+      <table id="sample-table"class="yellow lighten-5 responsive-table">
+        <thead>
+          <tr class="row">
+            <th>Title</th>
+            <th>Author</th>
+            <th>Number of pages</th>
+            <th>Read or not?</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <!-- form to add new books -->
+      <button data-target="modal1" id="newBook" class="waves-effect blue-grey lighten-3 btn-large btn modal-trigger">New Book</button>
+    </div>
+    <div class="col l1"></div>
+  </div>
+
+  <!-- modal -->
+  <div id="modal1" class="modal">
+    <div class="modal-header">
+      <span class="modal-close">&times;</span>
+      <h5>Add a new book</h5>
+    </div>
+    <div class="modal-content">
+      <!-- form to add new books -->
+      <form action="" method="post" id="form1">
+        Title: <input type="text" name="form" id="book-title"><br>
+        Author: <input type="text" name="form" id="book-author"><br>
+        Number of pages: <input type="number" name="form" id="book-pages"><br>
+        <!-- Toggle button in the form -->
+        <div class="switch">       
+          Read:
+          <label class="switch">
+            <input type="checkbox" id="book-read"></input>
+            <span class="lever"></span>
+          </label> 
+        </div>
+        <br>
+        <!-- button to add input -->
+
+      </form>
+    </div>
+    <div class="modal-footer">
+        <input class="waves-effect blue-grey lighten-3 btn" type="button" onclick="addBook()" value="Add New Book">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+  <script src="library.js"></script>
+</body>
+</html>
