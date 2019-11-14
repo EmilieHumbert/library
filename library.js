@@ -95,9 +95,10 @@ function render() {
 
     // Add delete button
     const deleteButton = document.createElement('input');
+    deleteButton.setAttribute('class', 'medium material-icons');
     Object.assign(deleteButton, {
       type: 'button',
-      value: 'Delete',
+      value: 'delete',
       onclick: () => {
         removeBookFromLibrary(index);
         render();
@@ -156,33 +157,13 @@ function addBook () {
   clearForm();
 }
 
-// Pop-up form
-// Get the modal
-const modal = document.getElementById('addBookModal');
+// Modal
+document.addEventListener('DOMContentLoaded', function() {
+  const elems = document.querySelectorAll('.modal');
+  M.Modal.init(elems, {});
+});
 
-// Get the button that opens the modal
-const newBookButton = document.getElementById('newBook');
-
-// Get the <span> element that closes the modal
-const closeButton = document.getElementById('closeModal');
-
-// When the user clicks on the button, open the modal
-newBookButton.onclick = function() {
-  modal.style.display = 'block';
-}
-
-// When the user clicks on <span> (x), close the modal
-closeButton.onclick = function() {
-  modal.style.display = 'none';
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = 'none';
-  }
-}
-
+// Local storage
 if (storageAvailable('localStorage')) {
   const storedLibrary = JSON.parse(window.localStorage.getItem('myLibrary'));
 
@@ -193,6 +174,7 @@ if (storageAvailable('localStorage')) {
   }
 }
 
+// Create an example
 if (myLibrary.length < 1) {
   const exampleBook = new Book('Keeper of lost things', 'Ruth Hogan', 244, true);
   addBookToLibrary(exampleBook);
