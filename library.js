@@ -1,5 +1,3 @@
-const myLibrary = [];
-
 // Check local storage
 function storageAvailable(type) {
   let storage;
@@ -25,6 +23,28 @@ function storageAvailable(type) {
   }
 }
 
+function updateLibraryStore (books) {
+  if (storageAvailable('localStorage')) {
+    window.localStorage.setItem('myLibrary', JSON.stringify(books));
+  }
+}
+
+class Library {
+  constructor(){
+    this.books = [];
+  };
+  
+  addBook (book) {
+    this.books.push(book);
+    updateLibraryStore(this.books);
+  }
+
+  removeBook (index) {
+    this.books.splice(index, 1);
+    updateLibraryStore(this.books);
+  }
+}
+
 class Book {
   constructor(title, author, pageNumber, read) {
     this.title = title;
@@ -38,28 +58,12 @@ class Book {
   }
 }
 
-function updateLibraryStore () {
-  if (storageAvailable('localStorage')) {
-    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-  }
-}
-
-function addBookToLibrary (book) {
-  myLibrary.push(book);
-  updateLibraryStore();
-}
-
-function removeBookFromLibrary (index) {
-  myLibrary.splice(index, 1);
-  updateLibraryStore();
-}
-
 function render() {
   // Create new table content
   const virtualContent = document.createElement('tbody');
 
   // Update table
-  myLibrary.forEach((book, index) => {
+  myLibrary.books.forEach((book, index) => {
     // Create row
     const row = virtualContent.insertRow(0);
 
@@ -100,7 +104,7 @@ function render() {
       type: 'button',
       value: 'delete',
       onclick: () => {
-        removeBookFromLibrary(index);
+        myLibrary.removeBook(index);
         render();
       },
     });
@@ -152,7 +156,7 @@ function addBook () {
   const read = getFieldValue('book-read');
   const book = new Book(title, author, pageNumber, read);
 
-  addBookToLibrary(book);
+  myLibrary.addBook(book);
   render();
   clearForm();
 }
@@ -163,21 +167,23 @@ document.addEventListener('DOMContentLoaded', function() {
   M.Modal.init(elems, {});
 });
 
+const myLibrary = new Library();
+
 // Local storage
 if (storageAvailable('localStorage')) {
   const storedLibrary = JSON.parse(window.localStorage.getItem('myLibrary'));
 
   if (Array.isArray(storedLibrary) && storedLibrary.length > 0) {
     storedLibrary.forEach((book) => {
-      myLibrary.push(book);
+      myLibrary.addBook(book);
     });
   }
 }
 
 // Create an example
-if (myLibrary.length < 1) {
+if (myLibrary.books.length < 1) {
   const exampleBook = new Book('Keeper of lost things', 'Ruth Hogan', 244, true);
-  addBookToLibrary(exampleBook);
+  myLibrary.addBook(exampleBook);
 }
 
 render();
