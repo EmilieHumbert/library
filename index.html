@@ -42,25 +42,29 @@
     </div>
     <div class="modal-content">
       <!-- form to add new books -->
-      <form action="" method="post" id="form1">
-        Title: <input type="text" name="form" id="book-title"><br>
-        Author: <input type="text" name="form" id="book-author"><br>
-        Number of pages: <input type="number" name="form" id="book-pages"><br>
+      <form id="form1">
+        <span>Title:</span>
+        <input type="text" name="form" id="book-title" required minlength="5">
+        <br>
+        <span>Author:</span>
+        <input type="text" name="form" id="book-author" required minlength="5">
+        <br>
+        <span>Number of pages:</span>
+        <input type="number" name="form" id="book-pages" required>
+        <br>
         <!-- Toggle button in the form -->
-        <div class="switch">       
-          Read:
+        <div class="switch">
+          <span>Read:</span>
           <label class="switch">
             <input type="checkbox" id="book-read"></input>
             <span class="lever"></span>
           </label> 
         </div>
         <br>
-        <!-- button to add input -->
-
+        <div class="modal-footer">
+          <button id="submit" class="waves-effect blue-grey lighten-3 btn" type="submit">Add New Book</button>
+        </div>
       </form>
-    </div>
-    <div class="modal-footer">
-        <input class="waves-effect blue-grey lighten-3 btn" type="button" onclick="addBook()" value="Add New Book">
     </div>
   </div>
 

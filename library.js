@@ -149,7 +149,7 @@ function clearForm () {
 }
 
 // Add a new book
-function addBook () {
+function addBook() {
   const title = getFieldValue('book-title');
   const author = getFieldValue('book-author');
   const pageNumber = getFieldValue('book-pages');
@@ -160,6 +160,10 @@ function addBook () {
   render();
   clearForm();
 }
+
+ // On submit
+ const form = document.getElementById('form1');
+ form.addEventListener('submit', () => addBook());
 
 // Modal
 document.addEventListener('DOMContentLoaded', function() {
@@ -178,12 +182,6 @@ if (storageAvailable('localStorage')) {
       myLibrary.addBook(book);
     });
   }
-}
-
-// Create an example
-if (myLibrary.books.length < 1) {
-  const exampleBook = new Book('Keeper of lost things', 'Ruth Hogan', 244, true);
-  myLibrary.addBook(exampleBook);
 }
 
 render();
